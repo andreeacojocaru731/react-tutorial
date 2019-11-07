@@ -5,21 +5,30 @@ class Square extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value:null
+            value: null
         }
     }
     render() {
+      var currentState = this.state.value;
+      console.log(currentState);
       return (
-        <button className="square" onClick={() => alert("Tell me more !")}>
-          {this.props.value}
+        <button className="square" onClick={() => this.setState({value: "X"})}>
+          {this.state.value}
         </button>
       );
     }
   }
   
   class Board extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        squares: Array(9).fill(null) 
+      };
+
+    }
     renderSquare(i) {
-      return <Square value={i} />;
+      return <Square value={this.state.squares[i]} onClick={()=>{this.handleClick(i)}}/>;
     }
   
     render() {
